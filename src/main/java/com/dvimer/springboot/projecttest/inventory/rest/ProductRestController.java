@@ -25,13 +25,35 @@ public class ProductRestController
 		return productService.findAll();
 	}
 
-	@GetMapping("/products/{productName}")
-	public List<Product> getProduct(@PathVariable String productName)
+	@GetMapping("/products/name/{productName}")
+	public List<Product> getProductByName(@PathVariable String productName)
 	{
 		List<Product> product = productService.findByName(productName);
 		if (product == null)
 		{
 			throw new RuntimeException("Product is not name: " + productName);
+		}
+		return product;
+	}
+
+	@GetMapping("/products/brand/{productBrand}")
+	public List<Product> getProductByBrand(@PathVariable String productBrand)
+	{
+		List<Product> product = productService.findByBrand(productBrand);
+		if (product == null)
+		{
+			throw new RuntimeException("Product is not brand: " + productBrand);
+		}
+		return product;
+	}
+
+	@GetMapping("/products/levtovers")
+	public List<Product> getLevtovers()
+	{
+		List<Product> product = productService.leftovers();
+		if (product == null)
+		{
+			throw new RuntimeException("quantity product more than 5");
 		}
 		return product;
 	}
@@ -50,16 +72,16 @@ public class ProductRestController
 		return product;
 	}
 
-//	@DeleteMapping("/products/{productId}")
-//	public String delete(@PathVariable int productId)
-//	{
-//		Product product = productService.findById(productId);
-//		if (product == null)
-//		{
-//			throw new RuntimeException("Product id not found: " + productId);
-//		}
-//		productService.delete(productId);
-//		return "Deleted product id: " + productId;
-//	}
+	@DeleteMapping("/products/{productId}")
+	public String delete(@PathVariable int productId)
+	{
+		Product product = productService.findById(productId);
+		if (product == null)
+		{
+			throw new RuntimeException("Product id not found: " + productId);
+		}
+		productService.delete(productId);
+		return "Deleted product id: " + productId;
+	}
 }
 

@@ -28,9 +28,30 @@ public class ProductServiceImpl implements ProductService
 
 	@Override
 	@Transactional
+	public Product findById(int id)
+	{
+		return productDao.findById(id);
+	}
+
+	@Override
+	@Transactional
 	public List<Product> findByName(String name)
 	{
 		return productDao.findByName(name);
+	}
+
+	@Override
+	@Transactional
+	public List<Product> findByBrand(String brand)
+	{
+		return productDao.findByBrand(brand);
+	}
+
+	@Override
+	@Transactional
+	public List<Product> leftovers()
+	{
+		return productDao.leftovers();
 	}
 
 	@Override

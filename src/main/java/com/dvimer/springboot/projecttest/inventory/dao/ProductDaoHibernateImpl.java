@@ -29,11 +29,39 @@ public class ProductDaoHibernateImpl implements ProductDao
 	}
 
 	@Override
+	public Product findById(int id)
+	{
+		Session currentSession = entityManager.unwrap(Session.class);
+		Product product = currentSession.get(Product.class, id);
+		return product;
+	}
+
+	@Override
 	public List<Product> findByName(String name)
 	{
 		Session currentSession = entityManager.unwrap(Session.class);
-		Query<Product> query = currentSession.createQuery("from Product as p where p.name=:productName",Product.class);
+		Query<Product> query = currentSession.createQuery("from Product as p where p.name=:productName", Product.class);
 		query.setParameter("productName", name);
+
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Product> findByBrand(String brand)
+	{
+		Session currentSession = entityManager.unwrap(Session.class);
+		Query<Product> query = currentSession.createQuery("from Product as p where p.brand=:productBrand", Product.class);
+		query.setParameter("productBrand", brand);
+
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Product> leftovers()
+	{
+		Session currentSession = entityManager.unwrap(Session.class);
+		Query<Product> query = currentSession.createQuery("from Product as p where p.quantity <=:productQuantity", Product.class);
+		query.setParameter("productQuantity", 5);
 
 		return query.getResultList();
 	}
