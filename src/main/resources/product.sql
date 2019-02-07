@@ -1,0 +1,13 @@
+CREATE DATABASE IF NOT EXISTS store;
+USE store;
+
+DROP TABLE IF EXISTS product;
+
+CREATE TABLE product(
+  id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(45) DEFAULT NULL ,
+  brand varchar(45) DEFAULT NULL ,
+  price int(18) DEFAULT NULL ,
+  quantity int(8) DEFAULT NULL ,
+  PRIMARY KEY (id)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET =latin1;
