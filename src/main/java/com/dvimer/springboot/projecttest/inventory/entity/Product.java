@@ -1,11 +1,12 @@
 package com.dvimer.springboot.projecttest.inventory.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "product")
-public class Product
+public class Product  implements Serializable
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
